@@ -9,6 +9,6 @@
     "tasks": [ {
         "taskName": "build",
         "suppressTaskName": true,
-        "args": [ "cd build; cmake .; make; " ]
+        "args": [ "mkdir build;cd build; cmake .; make; " ]
     }]
 }

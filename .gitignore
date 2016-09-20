@@ -28,8 +28,5 @@
 *.out
 *.app
 
-# CMakeFiles
-CMakeCache.txt
-cmake*
-bin/*
+# CMakeFilesls
 build/*
