@@ -2,8 +2,13 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "0.1.0",
-    "command": "make",
+    "command": "sh",
     "isShellCommand": true,
-    "args": [],
-    "showOutput": "always"
+    "showOutput": "always",
+    "args": ["-c"],
+    "tasks": [ {
+        "taskName": "build",
+        "suppressTaskName": true,
+        "args": [ "cd build; cmake .; make; " ]
+    }]
 }

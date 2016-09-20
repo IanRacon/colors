@@ -5,10 +5,10 @@
             "name": "C++ Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/colors",
+            "program": "${workspaceRoot}/bin/colors.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}/bin/",
             "environment": [],
             "externalConsole": true,
             "linux": {
@@ -25,7 +25,7 @@
             "name": "C++ Attach",
             "type": "cppdbg",
             "request": "attach",
-            "program": "${workspaceRoot}/colors",
+            "program": "${workspaceRoot}/bin/colors.exe",
             "processId": "${command.pickProcess}",
             "linux": {
                 "MIMode": "gdb"
