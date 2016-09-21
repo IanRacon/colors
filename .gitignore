@@ -28,5 +28,11 @@
 *.out
 *.app
 
-# CMakeFilesls
+# Build files
 build/*
+
+# Generated data
+*.dat
+
+# Logs
+*.log

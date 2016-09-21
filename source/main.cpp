@@ -3,8 +3,9 @@
 #include <cmath>
 #include <string>
 #include "imnmath.hpp"
+#include "easylogging++.h"
 
-using namespace std;
+INITIALIZE_EASYLOGGINGPP
 
 const int xsize = 201;
 const int ysize = 61;
@@ -309,8 +310,11 @@ void zad3(){
 }
 
 int main(void){
+	LOG(INFO) << "zad1";
 	zad1();
+	LOG(INFO) << "zad2";
 	zad2();
+	LOG(INFO) << "zad3";
 	zad3();
 	return 0;
 }
