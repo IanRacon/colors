@@ -4,6 +4,7 @@
 #include <string>
 #include "imnmath.hpp"
 #include "easylogging++.h"
+#include "INIReader.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -43,6 +44,7 @@ void freeArray(double** array){
 		delete[] array[i];
 	delete[] array;
 }
+//tutaj zadajemy gestosc plamy w danym punkcie, czyli "objetosc" w danym punkcie
 double p0(double x, double y){
 	double part1;
 	double part2;
@@ -51,12 +53,14 @@ double p0(double x, double y){
 	part2 = pow(y-0.6,2);
 	return exp(-30*(part1+part2));
 }
+//do P_old wpisujemy poczatkowa gestosc plamy w danym punkcie
 void initP_old(double **array){
 	for(int i=1;i<xsize-1;++i)	
 		for(int j=1;j<ysize-1;++j){
 			array[i][j] = p0(i*dx, j*dy);
 		}	
 }
+//inicjalizujemy plame w srednim punkcie czasowym juz na podstawie predkosci
 void initP(double **p_old, double **p, double **u, double **v, double dt){
 	for(int i=0;i<xsize;++i)	
 		for(int j=0;j<ysize;++j){
@@ -150,24 +154,59 @@ double centerX(double **p, double I){
 	return sum/I;
 }
 void zad1(){
-	double **p_new, **p, **p_old, **u, **v, **temp;
-	double dt, t, tmax=15, I, center_x;
+	double **p_new, **p, **p_old;
+	//predkosc w kierunku (poziomym)
+	double **u;
+	//predkosc w kierunku (pionowym)
+	double **v;
+	//tymczasowa tablica 2D
+	double **temp;
+	// krok czasowy delta time
+	double dt;
+	// czas
+	double t;
+	//czas maksymalny
+	double tmax=15; 
+	//wartosc calki
+	double I; 
+	//centrum 
+	double center_x;
+	//inicjalizujemy strumien do zapisu
 	ofstream file;
+	// licznik
 	int counter=0;
+	// inicjalizacja tablic p_new, na poczatku wypelniona zerami
 	p_new = initArray();
+	// inicjalizacja tablicy p
 	p = initArray();
+	// inicjalizacja tablicy p_old
 	p_old = initArray();
+	// inicjalizacja tablicy predkosci poziomej
 	u = initArray();
+	// inicjalizacja tablicy predkosci pionowej
 	v = initArray();	
 	
-	initU(u);	
+	// inicjalizacja predkosci poziomych w ksztalt poziomej paraboli
+	initU(u);
+	// wypelnienie predkosci pionowych zerami
 	fillValue(v, 0);
+
+	// dt rowna sie dx podzielone przez 4*maksymalna predkosc zlozonych predkosci poziomej i pionowej
+	//mamy predkosc czastek i krok odleglosciowy - mozemy wyliczyc krok czasowy zeby wszystko sie zgadzalo
 	dt = dx/(4*max(u, v));	
 	
+	// inicjalizcja tablicy zawierajaca plame, to tutaj ustalamy gdzie ta plama jest!
 	initP_old(p_old);
+
+	//inicjalizacja tablicy plamy w pierwszym kroku czasowym na podstawie predkosci
 	initP(p_old, p, u, v, dt);
+
+	//otwieramy plik do zapisu
 	file.open("zad1.dat");
+
+	//dopoki nie przekroczymy calego czasu
 	while(t<tmax){
+		//schemat leapfrog
 		leapfrog(p_old, p, p_new, v, u, dt);
 		temp = p_old;
 		p_old = p; 	
@@ -175,8 +214,10 @@ void zad1(){
 		p_new = temp;
 		t+=dt;
 		I = densityI(p);
+		//jakis punkt centralny
 		center_x = centerX(p, I);
 		file << t << " " << I << " " << center_x << endl;
+		//zapisujemy do pliku wyglad plamy oleju
 		if(counter++%int(tmax/dt/SEQUENCES)==0)
 			imnd::push_data2D(p,xsize,ysize);
 	}
@@ -310,11 +351,10 @@ void zad3(){
 }
 
 int main(void){
-	LOG(INFO) << "zad1";
+	INIReader reader("configuration.ini");
+	LOG(INFO) << reader.GetInteger("test", "test", 0);
 	zad1();
-	LOG(INFO) << "zad2";
 	zad2();
-	LOG(INFO) << "zad3";
 	zad3();
 	return 0;
 }
