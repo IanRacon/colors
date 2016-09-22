@@ -208,14 +208,21 @@ void zad1(){
 	while(t<tmax){
 		//schemat leapfrog
 		leapfrog(p_old, p, p_new, v, u, dt);
+		//kopiujemy wskaznik na tablice p_old do temp
 		temp = p_old;
-		p_old = p; 	
+		//p_old wskazuje teraz na p
+		p_old = p;
+		//p wskazuje teraz na p_new
 		p = p_new;
+		//p_new zawiera teraz p_old
 		p_new = temp;
+		//przechodzimy do kolejnego kroku czasowego
 		t+=dt;
+		//obliczamy calke
 		I = densityI(p);
 		//jakis punkt centralny
 		center_x = centerX(p, I);
+		//zapisujemy do pliku calke i punkt centralny
 		file << t << " " << I << " " << center_x << endl;
 		//zapisujemy do pliku wyglad plamy oleju
 		if(counter++%int(tmax/dt/SEQUENCES)==0)
