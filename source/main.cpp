@@ -5,6 +5,7 @@
 #include "imnmath.hpp"
 #include "easylogging++.h"
 #include "INIReader.h"
+#include "Configuration.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -358,8 +359,8 @@ void zad3(){
 }
 
 int main(void){
-	INIReader reader("configuration.ini");
-	LOG(INFO) << reader.GetInteger("test", "test", 0);
+
+	// LOG(INFO) << reader.GetInteger("test", "test", 0);
 	zad1();
 	zad2();
 	zad3();
