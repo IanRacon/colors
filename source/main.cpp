@@ -6,33 +6,18 @@
 #include "easylogging++.h"
 #include "INIReader.h"
 #include "Configuration.h"
+#include "utils.h"
+#include "Tank.h"
 
 INITIALIZE_EASYLOGGINGPP
 
-const int xsize = 201;
-const int ysize = 61;
+const int xsize = Configuration::getInstance().getInt("sizeX");
+const int ysize = Configuration::getInstance().getInt("sizeY");
 const double dx = 0.02, dy = 0.02;
 const int OBSTACLE=1;
 const int NONE=0;
 const int SEQUENCES=100;
 
-void fill(int x1, int y1, int x2, int y2, double **array, double val){
-		for(int i=x1;i<x2;++i)
-			for(int j=y1;j<y2;++j)
-				array[i][j] = val;	
-}
-void printArray(double **array){
-	for(int i=0;i<xsize;++i){
-		for(int j=0;j<ysize;++j)
-			cout <<	array[i][j]; 
-		cout << endl;
-	}
-}
-void fillValue(double **array, double val){
-	for(int i=0;i<xsize;++i)
-		for(int j=0;j<ysize;++j)
-			array[i][j] = val; 
-}
 double **initArray(){
 	double **array = new double*[xsize];
 	for(int i=0;i<xsize;++i)
@@ -155,6 +140,7 @@ double centerX(double **p, double I){
 	return sum/I;
 }
 void zad1(){
+	//tablice gestosci
 	double **p_new, **p, **p_old;
 	//predkosc w kierunku (poziomym)
 	double **u;
@@ -330,7 +316,7 @@ void zad3(){
 
 	initP_old(p);	
 	dt=dt/2.0;
-	fill(50, 40, 56, 61, flag, OBSTACLE);
+	fill2Darray(50, 40, 56, 61, flag, OBSTACLE);
 	
 	int counter = 0;
 	file.open("zad3.dat");
@@ -359,7 +345,7 @@ void zad3(){
 }
 
 int main(void){
-
+	// std::cout << Configuration::getInstance().getInt("sizeX") << std::endl << std::endl;
 	// LOG(INFO) << reader.GetInteger("test", "test", 0);
 	zad1();
 	zad2();
