@@ -22,7 +22,7 @@ double **initArray(){
 	double **array = new double*[xsize];
 	for(int i=0;i<xsize;++i)
 		array[i] = new double[ysize];
-	fillValue(array, 0);
+	utils::fill2Darray(0, 0, xsize, ysize, array, 0);
 	return array;
 }
 void freeArray(double** array){
@@ -176,7 +176,7 @@ void zad1(){
 	// inicjalizacja predkosci poziomych w ksztalt poziomej paraboli
 	initU(u);
 	// wypelnienie predkosci pionowych zerami
-	fillValue(v, 0);
+	utils::fill2Darray(0, 0, xsize, ysize, v, 0);
 
 	// dt rowna sie dx podzielone przez 4*maksymalna predkosc zlozonych predkosci poziomej i pionowej
 	//mamy predkosc czastek i krok odleglosciowy - mozemy wyliczyc krok czasowy zeby wszystko sie zgadzalo
@@ -316,7 +316,7 @@ void zad3(){
 
 	initP_old(p);	
 	dt=dt/2.0;
-	fill2Darray(50, 40, 56, 61, flag, OBSTACLE);
+	utils::fill2Darray(50, 40, 56, 61, flag, OBSTACLE);
 	
 	int counter = 0;
 	file.open("zad3.dat");
@@ -343,12 +343,27 @@ void zad3(){
 	freeArray(u);
 	freeArray(v);
 }
+void zad4()
+{
+	std::vector<double> densityMatrix;
+	int cols = Configuration::getInstance().getInt("sizeX");
+	int rows = Configuration::getInstance().getInt("sizeY");
+	int valuesAmount = cols*rows;
+	densityMatrix.reserve(valuesAmount);
 
+	int colorX = Configuration::getInstance().getDouble("colorPlacementX");
+	int colorY = Configuration::getInstance().getDouble("colorPlacementY");
+	double colorValue = Configuration::getInstance().getDouble("colorValue");
+	densityMatrix[utils::to1D(cols, colorX, colorY)] = colorValue;
+
+	std::vector<double> csrMatrix;
+}
 int main(void){
 	// std::cout << Configuration::getInstance().getInt("sizeX") << std::endl << std::endl;
 	// LOG(INFO) << reader.GetInteger("test", "test", 0);
-	zad1();
-	zad2();
-	zad3();
+	//zad1();
+	//zad2();
+	//zad3();
+	zad4();
 	return 0;
 }
