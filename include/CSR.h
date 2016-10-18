@@ -4,8 +4,8 @@
 class CSR
 {
 public:
-    CSR(int absoluteMatrixCols, int absoluteMatrixRows, int estimatedMinElements=0);
-    void setValue(int col, int row, double value);
+    CSR(int maxRows, int maxCols, int estimatedMinElements=0);
+    void setValue(int row, int col, double value);
     void setEndIndicator();
     int rows() const;
     std::vector<double> allElements;

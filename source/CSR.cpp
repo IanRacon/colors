@@ -9,7 +9,7 @@ absoluteMatrixRows(absoluteMatrixRows)
     byColumnIndices.reserve(estimatedMinElements+1);
     rowStartIndices.reserve(absoluteMatrixRows+1);
 }
-void CSR::setValue(int col, int row, double value)
+void CSR::setValue(int row, int col, double value)
 {
     if(value != 0.0)
     {
@@ -33,7 +33,7 @@ void CSR::markZeroFilledRows(int numberOfZeroRows)
 }
 void CSR::setEndIndicator()
 {
-    rowStartIndices.push_back(allElements.size()-1);
+    rowStartIndices.push_back(allElements.size());
 }
 int CSR::rows() const
 {

@@ -27,13 +27,13 @@ public:
         csrMatrix = std::make_shared<CSR>(matrixColsSize, matrixRowsSize, estimatedMinElements);
         for(int i=0;i<matrixRowsSize;++i)
             for(int j=0;j<matrixColsSize;++j)
-                csrMatrix->setValue(j, i, sparseMatrix[i][j]);
+                csrMatrix->setValue(i, j, sparseMatrix[i][j]);
         csrMatrix->setEndIndicator();
 
         csrDiagonalMatrix = std::make_shared<CSR>(matrixColsSize, matrixRowsSize, estimatedMinDiagonalMatrixElements);
         for(int i=0;i<matrixRowsSize-2;++i)
                     for(int j=2;j<matrixColsSize;++j)
-                        csrMatrix->setValue(j, i, sparseMatrix[i][j]);
+                        csrMatrix->setValue(i, j, sparseMatrix[i][j]);
         for(int i=0;i<matrixRowsSize;++i)
                 csrDiagonalMatrix->setValue(i, i, sparseDiagonalMatrix[i][i]);
         csrDiagonalMatrix->setEndIndicator();
@@ -75,7 +75,7 @@ TEST_F(CSRTest, CSRmatrix_shouldContainValidRowsIndices)
     EXPECT_EQ(3, csrMatrix->rowStartIndices[2]);
     EXPECT_EQ(7, csrMatrix->rowStartIndices[3]);
     EXPECT_EQ(8, csrMatrix->rowStartIndices[4]);
-    EXPECT_EQ(9, csrMatrix->rowStartIndices[5]);
+    EXPECT_EQ(10, csrMatrix->rowStartIndices[5]);
 }
 //Three next tests fails because matrix has to be filled consecutevily
 //row by row
