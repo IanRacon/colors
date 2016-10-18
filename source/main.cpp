@@ -3,13 +3,13 @@
 #include <cmath>
 #include <string>
 #include "imnmath.hpp"
-#include "easylogging++.h"
+//#include "easylogging++.h"
 #include "INIReader.h"
 #include "Configuration.h"
 #include "utils.h"
 #include "Tank.h"
 
-INITIALIZE_EASYLOGGINGPP
+//INITIALIZE_EASYLOGGINGPP
 
 const int xsize = Configuration::getInstance().getInt("sizeX");
 const int ysize = Configuration::getInstance().getInt("sizeY");
@@ -356,7 +356,6 @@ void zad4()
 	double colorValue = Configuration::getInstance().getDouble("colorValue");
 	densityMatrix[utils::to1D(cols, colorX, colorY)] = colorValue;
 
-	std::vector<double> csrMatrix;
 }
 int main(void){
 	// std::cout << Configuration::getInstance().getInt("sizeX") << std::endl << std::endl;

@@ -4,15 +4,16 @@
 class CSR
 {
 public:
-    CSR(int absoluteMatrixCols, int absoluteMatrixRows, int estimatedMaxElements=0);
+    CSR(int absoluteMatrixCols, int absoluteMatrixRows, int estimatedMinElements=0);
     void setValue(int col, int row, double value);
-private:
-    int absoluteMatrixCols;
-    int absoluteMatrixRows;
-
+    void setEndIndicator();
+    int rows() const;
     std::vector<double> allElements;
     std::vector<int> byColumnIndices;
     std::vector<int> rowStartIndices;
+    int absoluteMatrixRows;
+private:
+    int absoluteMatrixCols;
 
     void markZeroFilledRows(int presentRow);
     void setValueIndexInRow(int presentRow);
