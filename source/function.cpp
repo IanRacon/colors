@@ -1,59 +1,59 @@
 #include "function.h"
 #include <cmath>
+#include <iostream>
+#include "imnmath.hpp"
 
 namespace function
 {
+double clockwiseX(double angle)
+{
+    return sin(angle);
+}
+double clockwiseY(double angle)
+{
+    return -cos(angle);
+}
+double counterClockwiseX(double angle)
+{
+    return -sin(angle);
+}
+double counterClockwiseY(double angle)
+{
+    return cos(angle);
+}
 double calculateAngle(int x, int y, double radius)
 {
+    if (radius == 0)
+        return 0;
     if (y < 0)
         return M_PI * 2 - acos(x / radius);
     else if (y >= 0)
         return acos(x / radius);
 }
-double calculateSpinVX(double spinRange, double radius, double speedFactor, double angle)
+double calculateSpinV(double spinRange, double radius, double speedFactor, double angle, double (*dirfunc)(const double))
 {
-    return speedFactor * sin(M_PI * radius / spinRange) * sin(angle);
+    return speedFactor * sin(M_PI * radius / spinRange) * dirfunc(angle);
 }
-double calculateSpinVY(double spinRange, double radius, double speedFactor, double angle)
+double **fillVDistrib(double spinCenterX, double spinCenterY, double range,
+                      double speedFactor, int size, double (*dirfunc)(const double))
 {
-    return speedFactor * sin(M_PI * radius / spinRange) * (-cos(angle));
-}
-double **fillVDistributionX(double spinCenterX, double spinCenterY, double range,
-                            double speedFactor, const int size)
-{
-    double **vDistributionX = new double *[size];
-    for (int i = 0; i < size; ++i)
-        vDistributionX[i] = new double[size];
+    double **vDistribution = imn<double>::matrix(size, size);
     double radius = 0;
-    int x2;
-    int y2;
+    double x2;
+    double y2;
     for (int i = 0; i < size; ++i)
         for (int j = 0; j < size; ++j)
         {
-            x2 = i - spinCenterY;
-            y2 = j - spinCenterX;
+            y2 = i - spinCenterY;
+            x2 = j - spinCenterX;
             radius = sqrt(pow(x2, 2) + pow(y2, 2));
             if (radius <= range)
-                vDistributionX[i][j] = calculateSpinVX(range, radius, speedFactor, calculateAngle(x2, y2, radius));
+            {
+                vDistribution[i][j] = calculateSpinV(range, radius, speedFactor, calculateAngle(x2, y2, radius), dirfunc);
+                // std::cout << "vDistribution[" << i << "][" << j << "]"
+                //           << " = " << vDistribution[i][j] << std::endl;
+            }
         }
-}
-double **fillVDistributionYdouble(double spinCenterX, double spinCenterY, double range,
-                                  double speedFactor, int size)
-{
-    double **vDistributionY = new double *[size];
-    for (int i = 0; i < size; ++i)
-        vDistributionY[i] = new double[size];
-    double radius = 0;
-    int x2;
-    int y2;
-    for (int i = 0; i < size; ++i)
-        for (int j = 0; j < size; ++j)
-        {
-            x2 = i - spinCenterY;
-            y2 = j - spinCenterX;
-            radius = sqrt(pow(x2, 2) + pow(y2, 2));
-            if (radius <= range)
-                vDistributionY[i][j] = calculateSpinVY(range, radius, speedFactor, calculateAngle(x2, y2, radius));
-        }
+    return vDistribution;
 }
 }

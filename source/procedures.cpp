@@ -32,8 +32,6 @@ std::vector<double> product(const CSR &csrMatrix, const std::vector<double> &myV
     if (csrMatrix.cols() != myVector.size())
         throw std::logic_error("Size of matrix and vector not the same");
 
-    // int indexOfFirstElementInRow;
-    // int indexOfLastElementInRow;
     for (int i = 0; i < csrMatrix.rows(); ++i)
         for (int j = csrMatrix.rowStartIndices[i]; j < csrMatrix.rowStartIndices[i + 1]; ++j)
             result[i] += csrMatrix.allElements[j] * myVector[csrMatrix.byColumnIndices[j]];
@@ -113,7 +111,7 @@ std::vector<double> conjugateGradient(const CSR &csrMatrix,
         pj1 = add(rj1, multiply(betaj, pj));
 
         convergence = sqrt(rjrj);
-        std::cout << "Convergence: " << convergence << std::endl;
+        //std::cout << "Convergence: " << convergence << std::endl;
         // std::cout << "pj: " << printVector(pj) << ", pj1: " << printVector(pj1) << std::endl;
         // std::cout << "rj: " << printVector(rj) << ", rj1: " << printVector(rj1) << std::endl;
         // std::cout << "xj: " << printVector(xj) << ", xj1: " << printVector(xj1) << std::endl;
@@ -166,7 +164,7 @@ void conjugateGradientFast(const CSR &csrMatrix,
         addFast(rj1, temp, pj1, size);
 
         convergence = sqrt(std::inner_product(rj, rj + size, rj, 0.0));
-        std::cout << "Convergence: " << convergence << std::endl;
+        //std::cout << "Convergence: " << convergence << std::endl;
         // std::cout << "pj: " << printVector(pj) << ", pj1: " << printVector(pj1) << std::endl;
         // std::cout << "rj: " << printVector(rj) << ", rj1: " << printVector(rj1) << std::endl;
         // std::cout << "xj: " << printVector(xj) << ", xj1: " << printVector(xj1) << std::endl;

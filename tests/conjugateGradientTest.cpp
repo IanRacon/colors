@@ -44,7 +44,7 @@ TEST(procedureConjugateGradient, conjugateGradient_shouldReturnRightVector_for6x
     }
 }
 
-TEST(procedureConjugateGradient, conjugateGradient_shouldReturnRightVector_for1000x1000)
+TEST(procedureConjugateGradient, conjugateGradient_shouldConverge_for1000x1000)
 {
     int size = 1000;
     std::vector<double> b;
@@ -61,8 +61,8 @@ TEST(procedureConjugateGradient, conjugateGradient_shouldReturnRightVector_for10
         for (int j = 0; j < size; ++j)
             csrMatrix.setValue(i, j, (i + 1) + (j + 1));
     csrMatrix.setEndIndicator();
-    double *result = new double[size];
-    conjugateGradientFast(csrMatrix, b, x0, result);
-    //std::vector<double> result = conjugateGradient(csrMatrix, b, x0);
+    //double *result = new double[size];
+    //conjugateGradientFast(csrMatrix, b, x0, result);
+    std::vector<double> result = conjugateGradient(csrMatrix, b, x0);
 }
 }
