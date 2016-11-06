@@ -83,6 +83,14 @@ std::string printVector(const std::vector<double> &vector)
         ss << el << ", ";
     return ss.str();
 }
+double sum2DArray(const double *const *const array, double rows, double cols)
+{
+    double sum = 0.0;
+    for (int i = 0; i < rows; ++i)
+        for (int j = 0; j < cols; ++j)
+            sum += array[i][j];
+    return sum;
+}
 std::vector<double> conjugateGradient(const CSR &csrMatrix,
                                       const std::vector<double> &b,
                                       const std::vector<double> &x0)

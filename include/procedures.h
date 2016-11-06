@@ -17,4 +17,5 @@ void multiplyFast(const double multiplier, const double *vector, double *result)
 void conjugateGradientFast(const CSR &csrMatrix, const std::vector<double> &b, const std::vector<double> &x0, double *result);
 void substractFast(const double *lhs, const double *rhs, double *result, int size);
 void addFast(const double *lhs, const double *rhs, double *result, int size);
+double sum2DArray(const double *const *const array, double rows, double cols);
 }

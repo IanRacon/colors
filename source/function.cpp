@@ -48,12 +48,41 @@ double **fillVDistrib(double spinCenterX, double spinCenterY, double range,
             x2 = j - spinCenterX;
             radius = sqrt(pow(x2, 2) + pow(y2, 2));
             if (radius <= range)
-            {
                 vDistribution[i][j] = calculateSpinV(range, radius, speedFactor, calculateAngle(x2, y2, radius), dirfunc);
-                // std::cout << "vDistribution[" << i << "][" << j << "]"
-                //           << " = " << vDistribution[i][j] << std::endl;
-            }
         }
     return vDistribution;
+}
+CSR fillRoDistrib(double **velocityArrayX, double **velocityArrayY, int matrixSize, double timeStep, double moveStep)
+{
+    double scatterMatrixSize = matrixSize * matrixSize;
+    CSR scatterMatrix(scatterMatrixSize, scatterMatrixSize, scatterMatrixSize);
+    for (int i = 0; i < matrixSize; ++i)
+    {
+        for (int j = 0; j < matrixSize; ++j)
+        {
+            double l = i * matrixSize + j;
+            double alpha1 = -calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
+            double alpha2 = -calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double alpha3 = 1;
+            double alpha4 = calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double alpha5 = calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
+            if (l - matrixSize >= 0)
+                scatterMatrix.setValue(l, l - matrixSize, alpha1);
+            if (l - 1 >= 0)
+                scatterMatrix.setValue(l, l - 1, alpha2);
+
+            scatterMatrix.setValue(l, l, alpha3);
+
+            if (l + 1 <= scatterMatrixSize)
+                scatterMatrix.setValue(l, l + 1, alpha4);
+            if (l + matrixSize <= scatterMatrixSize)
+                scatterMatrix.setValue(l, l + matrixSize, alpha5);
+        }
+    }
+    return scatterMatrix;
+}
+double calculateModulus(double timeStep, double moveStep, double velocity)
+{
+    return (timeStep * velocity) / (4 * moveStep);
 }
 }
