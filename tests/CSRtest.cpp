@@ -6,42 +6,68 @@ const int matrixColsSize = 5;
 const int matrixRowsSize = 5;
 const int estimatedMinElements = 10;
 const int estimatedMinDiagonalMatrixElements = 8;
-const std::vector<std::vector<double>> sparseMatrix = { 
-                                        {10.0, 2.0, 0.0, 0.0, 0.0},
-                                        {0.0, 0.0, 1.0, 0.0, 0.0},
-                                        {5.0, 2.0, 3.0, 0.0, 3.0},
-                                        {0.0, 3.0, 0.0, 0.0, 0.0},
-                                        {0.0, 8.0, 0.0, 99.0, 0.0}};
-const std::vector<std::vector<double>> sparseDiagonalMatrix = { 
-                                        {10.0, 0.0, 3.0, 0.0, 0.0},
-                                        {0.0, 5.0, 0.0, 5.0, 0.0},
-                                        {0.0, 0.0, 11.0, 0.0, 7.0},
-                                        {0.0, 0.0, 0.0, 2.0, 0.0},
-                                        {0.0, 0.0, 0.0, 0.0, 56.0}};
+const std::vector<std::vector<double>> sparseMatrix = {
+    {10.0, 2.0, 0.0, 0.0, 0.0},
+    {0.0, 0.0, 1.0, 0.0, 0.0},
+    {5.0, 2.0, 3.0, 0.0, 3.0},
+    {0.0, 3.0, 0.0, 0.0, 0.0},
+    {0.0, 8.0, 0.0, 99.0, 0.0}};
+const std::vector<std::vector<double>> sparseDiagonalMatrix = {
+    {10.0, 0.0, 3.0, 0.0, 0.0},
+    {0.0, 5.0, 0.0, 5.0, 0.0},
+    {0.0, 0.0, 11.0, 0.0, 7.0},
+    {0.0, 0.0, 0.0, 2.0, 0.0},
+    {0.0, 0.0, 0.0, 0.0, 56.0}};
 const std::vector<double> nonZeroElements = {10.0, 2.0, 1.0, 5.0, 2.0, 3.0, 3.0, 3.0, 8.0, 99.0};
 class CSRTest : public ::testing::Test
 {
-public:
+  public:
     void SetUp()
     {
         csrMatrix = std::make_shared<CSR>(matrixColsSize, matrixRowsSize, estimatedMinElements);
-        for(int i=0;i<matrixRowsSize;++i)
-            for(int j=0;j<matrixColsSize;++j)
+        for (int i = 0; i < matrixRowsSize; ++i)
+            for (int j = 0; j < matrixColsSize; ++j)
                 csrMatrix->setValue(i, j, sparseMatrix[i][j]);
         csrMatrix->setEndIndicator();
 
         csrDiagonalMatrix = std::make_shared<CSR>(matrixColsSize, matrixRowsSize, estimatedMinDiagonalMatrixElements);
-        for(int i=0;i<matrixRowsSize-2;++i)
-                    for(int j=2;j<matrixColsSize;++j)
-                        csrMatrix->setValue(i, j, sparseMatrix[i][j]);
-        for(int i=0;i<matrixRowsSize;++i)
-                csrDiagonalMatrix->setValue(i, i, sparseDiagonalMatrix[i][i]);
+        for (int i = 0; i < matrixRowsSize - 2; ++i)
+            for (int j = 2; j < matrixColsSize; ++j)
+                csrMatrix->setValue(i, j, sparseMatrix[i][j]);
+        for (int i = 0; i < matrixRowsSize; ++i)
+            csrDiagonalMatrix->setValue(i, i, sparseDiagonalMatrix[i][i]);
         csrDiagonalMatrix->setEndIndicator();
     }
     std::shared_ptr<CSR> csrMatrix;
     std::shared_ptr<CSR> csrDiagonalMatrix;
 };
 
+TEST_F(CSRTest, CSRmatrix_shouldSetandGetSameValue)
+{
+    CSR csrMatrix(3, 3, 2);
+    csrMatrix.setValue(0, 0, 1.0);
+    csrMatrix.setValue(1, 1, 2.0);
+    csrMatrix.setValue(2, 2, 3.0);
+    csrMatrix.setEndIndicator();
+    ASSERT_EQ(0.0, csrMatrix.getValue(0, 1));
+    ASSERT_EQ(3.0, csrMatrix.getValue(2, 2));
+}
+TEST_F(CSRTest, CSRmatrix_shouldSetandGetSameValueFor1x1Matrix)
+{
+    CSR csrMatrix(1, 1, 1);
+    csrMatrix.setValue(0, 0, 1.0);
+    csrMatrix.setEndIndicator();
+    ASSERT_EQ(1.0, csrMatrix.getValue(0, 0));
+}
+TEST_F(CSRTest, CSRmatrix_shouldSetandGetSameValueFor2x2Matrix)
+{
+    CSR csrMatrix(2, 2, 2);
+    csrMatrix.setValue(0, 0, 1.0);
+    csrMatrix.setValue(1, 1, 2.0);
+    csrMatrix.setEndIndicator();
+    ASSERT_EQ(1.0, csrMatrix.getValue(0, 0));
+    ASSERT_EQ(2.0, csrMatrix.getValue(1, 1));
+}
 TEST_F(CSRTest, CSRmatrix_shouldContainValidValues)
 {
     EXPECT_EQ(sparseMatrix[0][0], csrMatrix->allElements[0]);

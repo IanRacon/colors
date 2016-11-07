@@ -60,7 +60,7 @@ CSR fillRoDistrib(double **velocityArrayX, double **velocityArrayY, int matrixSi
     {
         for (int j = 0; j < matrixSize; ++j)
         {
-            double l = i * matrixSize + j;
+            double l = i*matrixSize + j;
             double alpha1 = -calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
             double alpha2 = -calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
             double alpha3 = 1;

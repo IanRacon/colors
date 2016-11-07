@@ -21,10 +21,10 @@ TEST(fillRoDistribTest, csrMatrixShouldHaveRightOrder)
 
     const double matrix[size * size * size * size] = {1, 0.5, 0.25, 0,
                                                       -0.5, 1, 0.5, 0.25,
-                                                      0.25, -0.5, 1, 0.5,
-                                                      0, 0.25, -0.5, 1};
+                                                      -0.25, -0.5, 1, 0.5,
+                                                      0, -0.25, -0.5, 1};
     CSR scatterMatrix = fillRoDistrib(velocityX, velocityY, size, timeStep, moveStep);
     for (int i = 0; i < size * size * size * size; ++i)
-        ASSERT_EQ(matrix[i], scatterMatrix.allElements[i]);
+        ASSERT_EQ(matrix[i], scatterMatrix.getValue(i / (size * size), i % (size * size)));
 }
 }
