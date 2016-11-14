@@ -5,11 +5,11 @@
 
 namespace function
 {
-double clockwiseX(double angle)
+double clockwiseY(const double angle)
 {
     return sin(angle);
 }
-double clockwiseY(double angle)
+double clockwiseX(const double angle)
 {
     return -cos(angle);
 }
@@ -35,14 +35,14 @@ double calculateSpinV(double spinRange, double radius, double speedFactor, doubl
     return speedFactor * sin(M_PI * radius / spinRange) * dirfunc(angle);
 }
 double **fillVDistrib(double spinCenterX, double spinCenterY, double range,
-                      double speedFactor, int size, double (*dirfunc)(const double))
+                      double speedFactor, int containerSize, double (*dirfunc)(const double))
 {
-    double **vDistribution = imn<double>::matrix(size, size);
+    double **vDistribution = imn<double>::matrix(containerSize, containerSize);
     double radius = 0;
     double x2;
     double y2;
-    for (int i = 0; i < size; ++i)
-        for (int j = 0; j < size; ++j)
+    for (int i = 0; i < containerSize; ++i)
+        for (int j = 0; j < containerSize; ++j)
         {
             y2 = i - spinCenterY;
             x2 = j - spinCenterX;
@@ -60,12 +60,12 @@ CSR fillRoDistrib(double **velocityArrayX, double **velocityArrayY, int matrixSi
     {
         for (int j = 0; j < matrixSize; ++j)
         {
-            double l = i*matrixSize + j;
+            double l = i * matrixSize + j;
             double alpha1 = -calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
             double alpha2 = -calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
             double alpha3 = 1;
-            double alpha4 = calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
-            double alpha5 = calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
+            double alpha4 = +calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double alpha5 = +calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
             if (l - matrixSize >= 0)
                 scatterMatrix.setValue(l, l - matrixSize, alpha1);
             if (l - 1 >= 0)
@@ -79,10 +79,41 @@ CSR fillRoDistrib(double **velocityArrayX, double **velocityArrayY, int matrixSi
                 scatterMatrix.setValue(l, l + matrixSize, alpha5);
         }
     }
+    scatterMatrix.setEndIndicator();
+    return scatterMatrix;
+}
+CSR initialfillRoDistrib(double **velocityArrayX, double **velocityArrayY, int matrixSize, double timeStep, double moveStep)
+{
+    double scatterMatrixSize = matrixSize * matrixSize;
+    CSR scatterMatrix(scatterMatrixSize, scatterMatrixSize, scatterMatrixSize);
+    for (int i = 0; i < matrixSize; ++i)
+    {
+        for (int j = 0; j < matrixSize; ++j)
+        {
+            double l = i * matrixSize + j;
+            double beta1 = +calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
+            double beta2 = +calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double beta3 = 1;
+            double beta4 = -calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double beta5 = -calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
+            if (l - matrixSize >= 0)
+                scatterMatrix.setValue(l, l - matrixSize, beta1);
+            if (l - 1 >= 0)
+                scatterMatrix.setValue(l, l - 1, beta2);
+
+            scatterMatrix.setValue(l, l, beta3);
+
+            if (l + 1 <= scatterMatrixSize)
+                scatterMatrix.setValue(l, l + 1, beta4);
+            if (l + matrixSize <= scatterMatrixSize)
+                scatterMatrix.setValue(l, l + matrixSize, beta5);
+        }
+    }
+    scatterMatrix.setEndIndicator();
     return scatterMatrix;
 }
 double calculateModulus(double timeStep, double moveStep, double velocity)
 {
-    return (timeStep * velocity) / (4 * moveStep);
+    return (timeStep * velocity) / (4.0 * moveStep);
 }
 }

@@ -14,8 +14,8 @@ const double moveStep = 0.1;
 
 TEST(fillRoDistribTest, csrMatrixShouldHaveRightOrder)
 {
-    double **velocityX = imn<double>::matrix(size, size); //fillVDistrib(spinCenterX, spinCenterY, range, speedFactor, size, clockwiseX);
-    double **velocityY = imn<double>::matrix(size, size); //fillVDistrib(spinCenterX, spinCenterY, range, speedFactor, size, clockwiseY);
+    double **velocityX = imn<double>::matrix(size, size);
+    double **velocityY = imn<double>::matrix(size, size);
     imn<double>::set_matrix(velocityX, size, size, 1.0);
     imn<double>::set_matrix(velocityY, size, size, 2.0);
 

@@ -1,4 +1,5 @@
 #include "CSR.h"
+#include <iostream>
 //#include "easylogging++.h"
 
 CSR::CSR(int absoluteMatrixCols, int absoluteMatrixRows, int estimatedMinElements) : absoluteMatrixCols(absoluteMatrixCols),

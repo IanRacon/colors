@@ -33,6 +33,11 @@ build/*
 
 # Generated data
 *.dat
+*.gif
+*.png
 
 # Logs
 *.log
+
+# Backups
+*~

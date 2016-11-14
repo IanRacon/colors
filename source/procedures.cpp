@@ -91,11 +91,11 @@ double sum2DArray(const double *const *const array, double rows, double cols)
             sum += array[i][j];
     return sum;
 }
-std::vector<double> conjugateGradient(const CSR &csrMatrix,
+std::vector<double> conjugateGradient(const CSR &A,
                                       const std::vector<double> &b,
                                       const std::vector<double> &x0)
 {
-    std::vector<double> rj = substract(b, product(csrMatrix, x0));
+    std::vector<double> rj = substract(b, product(A, x0));
     std::vector<double> pj = rj;
     std::vector<double> xj = x0;
     std::vector<double> xj1;
@@ -111,7 +111,7 @@ std::vector<double> conjugateGradient(const CSR &csrMatrix,
     while (convergence > limit)
     {
         rjrj = std::inner_product(rj.begin(), rj.end(), rj.begin(), 0.0);
-        Apj = product(csrMatrix, pj);
+        Apj = product(A, pj);
         alphaj = rjrj / std::inner_product(Apj.begin(), Apj.end(), pj.begin(), 0.0);
         xj1 = add(xj, multiply(alphaj, pj));
         rj1 = substract(rj, multiply(alphaj, Apj));
