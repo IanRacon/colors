@@ -2,8 +2,7 @@
 #include <iostream>
 //#include "easylogging++.h"
 
-CSR::CSR(int absoluteMatrixCols, int absoluteMatrixRows, int estimatedMinElements) : absoluteMatrixCols(absoluteMatrixCols),
-                                                                                     absoluteMatrixRows(absoluteMatrixRows)
+CSR::CSR(int absoluteMatrixCols, int absoluteMatrixRows, int estimatedMinElements) : absoluteMatrixCols(absoluteMatrixCols), absoluteMatrixRows(absoluteMatrixRows)
 {
     allElements.reserve(estimatedMinElements + 1);
     byColumnIndices.reserve(estimatedMinElements + 1);

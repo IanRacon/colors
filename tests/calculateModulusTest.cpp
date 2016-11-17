@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#include "function.h"
+#include "numerical.h"
 
-namespace function
+namespace numerical
 {
 TEST(calculateModulusTest, modulusWithShouldBeValid)
 {

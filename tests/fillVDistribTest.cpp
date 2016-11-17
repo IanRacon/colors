@@ -1,10 +1,10 @@
 #include "gtest/gtest.h"
 #include "imnmath.hpp"
-#include "function.h"
+#include "numerical.h"
 
-namespace function
+namespace numerical
 {
-TEST(functionfillVDistribTest, fillVDistrib_shouldFill0InCenterPoints)
+TEST(numericalfillVDistribTest, fillVDistrib_shouldFill0InCenterPoints)
 {
     int size = 100;
     double speedFactor = 2.0;
@@ -13,7 +13,7 @@ TEST(functionfillVDistribTest, fillVDistrib_shouldFill0InCenterPoints)
     ASSERT_EQ(0.0, velocityXMatrix[50][50]);
     imn<double>::free_matrix(velocityXMatrix, size);
 }
-TEST(functionfillVDistribTest, fillVDistrib_shouldNotFillBeyondRange)
+TEST(numericalfillVDistribTest, fillVDistrib_shouldNotFillBeyondRange)
 {
     int size = 100;
     double speedFactor = 2.0;
@@ -22,7 +22,7 @@ TEST(functionfillVDistribTest, fillVDistrib_shouldNotFillBeyondRange)
     ASSERT_EQ(0.0, velocityMatrix[50][61]);
     imn<double>::free_matrix(velocityMatrix, size);
 }
-TEST(functionfillVDistribTest, fillVDistrib_shouldFillInRange)
+TEST(numericalfillVDistribTest, fillVDistrib_shouldFillInRange)
 {
     int size = 100;
     double speedFactor = 2.0;
@@ -31,7 +31,7 @@ TEST(functionfillVDistribTest, fillVDistrib_shouldFillInRange)
     ASSERT_TRUE(velocityMatrix[59][49] > 0.0);
     imn<double>::free_matrix(velocityMatrix, size);
 }
-TEST(functionfillVDistribTest, fillVDistribX_shouldBeZeroOnXAxis)
+TEST(numericalfillVDistribTest, fillVDistribX_shouldBeZeroOnXAxis)
 {
     int size = 100;
     double speedFactor = 2.0;
@@ -44,7 +44,7 @@ TEST(functionfillVDistribTest, fillVDistribX_shouldBeZeroOnXAxis)
     }
     imn<double>::free_matrix(velocityMatrix, size);
 }
-TEST(functionfillVDistribTest, fillVDistribY_shouldBeZeroOnYAxis)
+TEST(numericalfillVDistribTest, fillVDistribY_shouldBeZeroOnYAxis)
 {
     int size = 100;
     double speedFactor = 2.0;

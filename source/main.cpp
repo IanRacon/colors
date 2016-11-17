@@ -9,7 +9,7 @@
 #include "utils.h"
 #include "Tank.h"
 #include "CSR.h"
-#include "function.h"
+#include "numerical.h"
 #include "procedures.h"
 #include <numeric>
 
@@ -414,33 +414,25 @@ void zad4()
     double mixerSpeed = Configuration::getInstance().getDouble("mixerSpeed");
     int frames = Configuration::getInstance().getInt("frames");
 
-    double **velocityArrayX = function::fillVDistrib(mixerX, mixerY, mixerSize, mixerSpeed, rows, function::clockwiseX);
-    double **velocityArrayY = function::fillVDistrib(mixerX, mixerY, mixerSize, mixerSpeed, rows, function::clockwiseY);
-    imnd::plot_2d_system("velocityX", velocityArrayX, rows, cols, 1, 1);
-    imnd::plot_2d_system("velocityY", velocityArrayY, rows, cols, 1, 1);
+    double **velocityArrayX = numerical::fillVDistrib(mixerX, mixerY, mixerSize, mixerSpeed, rows, numerical::clockwiseX);
+    double **velocityArrayY = numerical::fillVDistrib(mixerX, mixerY, mixerSize, mixerSpeed, rows, numerical::clockwiseY);
+    imnd::plot_2d_system("velocityX.png", velocityArrayX, rows, cols, 1, 1);
+    imnd::plot_2d_system("velocityY.png", velocityArrayY, rows, cols, 1, 1);
 
-    CSR modulusMatrix = function::initialfillRoDistrib(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
-    std::vector<double> initialDensityMatrix;
-    initialDensityMatrix.reserve(cols * rows);
-    for (int i = 0; i < cols * rows; ++i)
-        initialDensityMatrix.push_back(0);
+    CSR modulusMatrix;
+    std::vector<double> initialDensityMatrix(cols * rows);
     initialDensityMatrix[colorPlacementY * rows + colorPlacementX] = densityValue;
 
     std::vector<double> rhsVector = procedures::product(modulusMatrix, initialDensityMatrix);
     std::vector<double> result;
-    result.reserve(cols * rows);
-    result = initialDensityMatrix;
-    std::vector<double> x0;
-    x0.reserve(cols * rows);
-    for (int i = 0; i < cols * rows; ++i)
-        x0.push_back(0);
+    std::vector<double> x0(cols * rows);
     int counter = 0;
     for (double i = 0; i < time; i += timeStep)
     {
         //std::cout << "time: " << i << std::endl;
-        modulusMatrix = function::fillRoDistrib(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
+        modulusMatrix = numerical::fillRoDistrib(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
         result = procedures::conjugateGradient(modulusMatrix, rhsVector, x0);
-        modulusMatrix = function::initialfillRoDistrib(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
+        modulusMatrix = numerical::initialfillRoDistrib(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
         rhsVector = procedures::product(modulusMatrix, result);
         // std::cout << std::accumulate(result.begin(), result.end(), 0.0) << std::endl;
         if (counter++ % int(time / timeStep / frames) == 0)

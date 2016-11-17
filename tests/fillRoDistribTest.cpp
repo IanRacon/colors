@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
-#include "function.h"
+#include "numerical.h"
 #include "imnmath.hpp"
 
-namespace function
+namespace numerical
 {
 const int size = 2;
 const double spinCenterX = 2;

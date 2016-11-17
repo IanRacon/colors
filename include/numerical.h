@@ -1,6 +1,6 @@
 #pragma once
 #include "CSR.h"
-namespace function
+namespace numerical
 {
 double clockwiseX(const double angle);
 double clockwiseY(const double angle);

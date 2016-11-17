@@ -4,6 +4,9 @@
 #include <stdexcept>
 #include <cmath>
 #include <sstream>
+#include <future>
+#include <time.h>
+#include <chrono>
 
 namespace procedures
 {
@@ -23,14 +26,14 @@ void productFast(const CSR &csrMatrix, const double *vector, double *result)
 }
 std::vector<double> product(const CSR &csrMatrix, const std::vector<double> &myVector)
 {
-    std::vector<double> result;
-    result.reserve(myVector.size());
-    for (int i = 0; i < csrMatrix.rows(); ++i)
-        result.push_back(0.0);
-    if (csrMatrix.allElements.size() == 0)
-        return result;
-    if (csrMatrix.cols() != myVector.size())
-        throw std::logic_error("Size of matrix and vector not the same");
+    std::vector<double> result(myVector.size());
+    // result.reserve(myVector.size());
+    // for (int i = 0; i < csrMatrix.rows(); ++i)
+    //     result.push_back(0.0);
+    // if (csrMatrix.allElements.size() == 0)
+    //     return result;
+    // if (csrMatrix.cols() != myVector.size())
+    //     throw std::logic_error("Size of matrix and vector not the same");
 
     for (int i = 0; i < csrMatrix.rows(); ++i)
         for (int j = csrMatrix.rowStartIndices[i]; j < csrMatrix.rowStartIndices[i + 1]; ++j)
@@ -44,10 +47,9 @@ void substractFast(const double *lhs, const double *rhs, double *result, int siz
 }
 std::vector<double> substract(const std::vector<double> &minuend, const std::vector<double> &subtrahend)
 {
-    std::vector<double> result;
-    result.reserve(minuend.size());
+    std::vector<double> result(minuend.size());
     for (int i = 0; i < minuend.size(); ++i)
-        result.push_back(minuend[i] - subtrahend[i]);
+        result[i] = minuend[i] - subtrahend[i];
     return result;
 }
 void multiplyFast(const double multiplier, const double *vector, double *result, int size)
@@ -57,10 +59,9 @@ void multiplyFast(const double multiplier, const double *vector, double *result,
 }
 std::vector<double> multiply(double multiplier, const std::vector<double> &vector)
 {
-    std::vector<double> result;
-    result.reserve(vector.size());
-    for (auto el : vector)
-        result.push_back(multiplier * el);
+    std::vector<double> result(vector.size());
+    for (int i = 0; i < vector.size(); ++i)
+        result[i] = multiplier * vector[i];
     return result;
 }
 void addFast(const double *lhs, const double *rhs, double *result, int size)
@@ -70,10 +71,9 @@ void addFast(const double *lhs, const double *rhs, double *result, int size)
 }
 std::vector<double> add(const std::vector<double> &lhs, const std::vector<double> &rhs)
 {
-    std::vector<double> result;
-    result.reserve(lhs.size());
+    std::vector<double> result(lhs.size());
     for (int i = 0; i < lhs.size(); ++i)
-        result.push_back(lhs[i] + rhs[i]);
+        result[i] = lhs[i] + rhs[i];
     return result;
 }
 std::string printVector(const std::vector<double> &vector)
@@ -107,12 +107,34 @@ std::vector<double> conjugateGradient(const CSR &A,
     const double limit = 1e-3;
     double rjrj = 0;
     std::vector<double> Apj;
-    double alphajApj = 0;
     while (convergence > limit)
     {
+        // std::cout << "Inner product\n";
+        // std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
         rjrj = std::inner_product(rj.begin(), rj.end(), rj.begin(), 0.0);
+        // std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        // std::cout << "Inner product took "
+        //           << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+        //           << "us.\n";
+
+        // std::cout << "Product\n";
+        // start = std::chrono::steady_clock::now();
         Apj = product(A, pj);
+        // end = std::chrono::steady_clock::now();
+        // std::cout << "Product took "
+        //           << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+        //           << "us.\n";
+
         alphaj = rjrj / std::inner_product(Apj.begin(), Apj.end(), pj.begin(), 0.0);
+
+        // std::cout << "Multiply\n";
+        // start = std::chrono::steady_clock::now();
+        // std::vector<double> aaaa = multiply(alphaj, pj);
+        // end = std::chrono::steady_clock::now();
+        // std::cout << "Multiply took "
+        //           << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+        //           << "us.\n";
+
         xj1 = add(xj, multiply(alphaj, pj));
         rj1 = substract(rj, multiply(alphaj, Apj));
         betaj = std::inner_product(rj1.begin(), rj1.end(), rj1.begin(), 0.0) / rjrj;

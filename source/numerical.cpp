@@ -1,9 +1,9 @@
-#include "function.h"
+#include "numerical.h"
 #include <cmath>
 #include <iostream>
 #include "imnmath.hpp"
 
-namespace function
+namespace numerical
 {
 double clockwiseY(const double angle)
 {
