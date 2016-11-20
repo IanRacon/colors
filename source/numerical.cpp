@@ -61,11 +61,11 @@ CSR fillRoDistrib(double **velocityArrayX, double **velocityArrayY, int matrixSi
         for (int j = 0; j < matrixSize; ++j)
         {
             double l = i * matrixSize + j;
-            double alpha1 = -calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
-            double alpha2 = -calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double alpha1 = +calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
+            double alpha2 = +calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
             double alpha3 = 1;
-            double alpha4 = +calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
-            double alpha5 = +calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
+            double alpha4 = -calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double alpha5 = -calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
             if (l - matrixSize >= 0)
                 scatterMatrix.setValue(l, l - matrixSize, alpha1);
             if (l - 1 >= 0)
@@ -73,9 +73,9 @@ CSR fillRoDistrib(double **velocityArrayX, double **velocityArrayY, int matrixSi
 
             scatterMatrix.setValue(l, l, alpha3);
 
-            if (l + 1 <= scatterMatrixSize)
+            if (l + 1 < scatterMatrixSize)
                 scatterMatrix.setValue(l, l + 1, alpha4);
-            if (l + matrixSize <= scatterMatrixSize)
+            if (l + matrixSize < scatterMatrixSize)
                 scatterMatrix.setValue(l, l + matrixSize, alpha5);
         }
     }
@@ -91,11 +91,11 @@ CSR initialfillRoDistrib(double **velocityArrayX, double **velocityArrayY, int m
         for (int j = 0; j < matrixSize; ++j)
         {
             double l = i * matrixSize + j;
-            double beta1 = +calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
-            double beta2 = +calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double beta1 = -calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
+            double beta2 = -calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
             double beta3 = 1;
-            double beta4 = -calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
-            double beta5 = -calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
+            double beta4 = +calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double beta5 = +calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
             if (l - matrixSize >= 0)
                 scatterMatrix.setValue(l, l - matrixSize, beta1);
             if (l - 1 >= 0)
@@ -103,9 +103,9 @@ CSR initialfillRoDistrib(double **velocityArrayX, double **velocityArrayY, int m
 
             scatterMatrix.setValue(l, l, beta3);
 
-            if (l + 1 <= scatterMatrixSize)
+            if (l + 1 < scatterMatrixSize)
                 scatterMatrix.setValue(l, l + 1, beta4);
-            if (l + matrixSize <= scatterMatrixSize)
+            if (l + matrixSize < scatterMatrixSize)
                 scatterMatrix.setValue(l, l + matrixSize, beta5);
         }
     }

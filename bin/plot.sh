@@ -6,7 +6,7 @@ set output "animation.gif"
 set pm3d
 set view map
 set size ratio -1
-set cbrange [0:4]
+set cbrange [0:1]
 i=3
 load "animation.plt"
 set output
