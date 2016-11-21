@@ -52,7 +52,7 @@ double **fillVDistrib(double spinCenterX, double spinCenterY, double range,
         }
     return vDistribution;
 }
-CSR fillRoDistrib(double **velocityArrayX, double **velocityArrayY, int matrixSize, double timeStep, double moveStep)
+CSR fillAlphaMatrix(double **velocityArrayX, double **velocityArrayY, int matrixSize, double timeStep, double moveStep)
 {
     double scatterMatrixSize = matrixSize * matrixSize;
     CSR scatterMatrix(scatterMatrixSize, scatterMatrixSize, scatterMatrixSize);
@@ -82,7 +82,7 @@ CSR fillRoDistrib(double **velocityArrayX, double **velocityArrayY, int matrixSi
     scatterMatrix.setEndIndicator();
     return scatterMatrix;
 }
-CSR initialfillRoDistrib(double **velocityArrayX, double **velocityArrayY, int matrixSize, double timeStep, double moveStep)
+CSR fillBetaMatrix(double **velocityArrayX, double **velocityArrayY, int matrixSize, double timeStep, double moveStep)
 {
     double scatterMatrixSize = matrixSize * matrixSize;
     CSR scatterMatrix(scatterMatrixSize, scatterMatrixSize, scatterMatrixSize);

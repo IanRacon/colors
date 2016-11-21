@@ -30,33 +30,42 @@ void mainRoutine()
     double mixerSize = Configuration::getInstance().getDouble("mixerSize");
     double mixerSpeed = Configuration::getInstance().getDouble("mixerSpeed");
     int frames = Configuration::getInstance().getInt("frames");
+    bool printGraphs = Configuration::getInstance().getBool("printGraphs");
 
     double **velocityArrayX = numerical::fillVDistrib(mixerX, mixerY, mixerSize, mixerSpeed, rows, numerical::clockwiseX);
     double **velocityArrayY = numerical::fillVDistrib(mixerX, mixerY, mixerSize, mixerSpeed, rows, numerical::clockwiseY);
-    imnd::plot_2d_system("velocityX.png", velocityArrayX, rows, cols, 1, 1);
-    imnd::plot_2d_system("velocityY.png", velocityArrayY, rows, cols, 1, 1);
+    if (printGraphs)
+    {
+        imnd::plot_2d_system("velocityX.png", velocityArrayX, rows, cols, 1, 1);
+        imnd::plot_2d_system("velocityY.png", velocityArrayY, rows, cols, 1, 1);
+    }
 
-    CSR modulusMatrix = numerical::initialfillRoDistrib(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
+    // CSR betaMatrix = numerical::initialfillRoDistrib(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
+    CSR betaMatrix = numerical::fillBetaMatrix(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
+    CSR alphaMatrix(rows * rows, cols * cols, rows * cols);
     std::vector<double> initialDensityMatrix(cols * rows);
     initialDensityMatrix[colorPlacementY * rows + colorPlacementX] = densityValue;
 
-    std::vector<double> rhsVector = procedures::product(modulusMatrix, initialDensityMatrix);
+    std::vector<double> rhsVector = procedures::product(betaMatrix, initialDensityMatrix);
     std::vector<double> result = initialDensityMatrix;
     std::vector<double> x0(cols * rows);
     int counter = 0;
+    ofstream file;
+    file.open("total_sum.dat");
     for (double i = 0; i < time; i += timeStep)
     {
         //std::cout << "time: " << i << std::endl;
-        modulusMatrix = numerical::fillRoDistrib(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
-        result = procedures::conjugateGradient(modulusMatrix, rhsVector, result);
-        modulusMatrix = numerical::initialfillRoDistrib(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
-        rhsVector = procedures::product(modulusMatrix, result);
+        alphaMatrix = numerical::fillAlphaMatrix(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
+        result = procedures::conjugateGradient(alphaMatrix, rhsVector, result);
+        betaMatrix = numerical::fillBetaMatrix(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
+        rhsVector = procedures::product(betaMatrix, result);
         if (counter++ % int(time / timeStep / frames) == 0)
         {
-            std::cout << std::accumulate(result.begin(), result.end(), 0.0) << std::endl;
+            file << std::accumulate(result.begin(), result.end(), 0.0) << std::endl;
             imnd::push_vector_data2D(result, rows, cols);
         }
     }
+    file.close();
     imnd::write_data2D("density.dat", rows, cols, moveStep, moveStep);
     imnd::free_data2D(rows, cols);
 }
