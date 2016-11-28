@@ -12,6 +12,7 @@
 #include "numerical.h"
 #include "procedures.h"
 #include <numeric>
+#include <stdexcept>
 
 //INITIALIZE_EASYLOGGINGPP
 
@@ -41,7 +42,7 @@ void mainRoutine()
     }
 
     // CSR betaMatrix = numerical::initialfillRoDistrib(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
-    CSR betaMatrix = numerical::fillBetaMatrix(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
+    CSR betaMatrix = numerical::fillBetaMatrix(velocityArrayX, velocityArrayY, rows, cols, timeStep, moveStep);
     CSR alphaMatrix(rows * rows, cols * cols, rows * cols);
     std::vector<double> initialDensityMatrix(cols * rows);
     initialDensityMatrix[colorPlacementY * rows + colorPlacementX] = densityValue;
@@ -55,15 +56,27 @@ void mainRoutine()
     for (double i = 0; i < time; i += timeStep)
     {
         //std::cout << "time: " << i << std::endl;
-        alphaMatrix = numerical::fillAlphaMatrix(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
-        result = procedures::conjugateGradient(alphaMatrix, rhsVector, result);
-        betaMatrix = numerical::fillBetaMatrix(velocityArrayX, velocityArrayY, rows, timeStep, moveStep);
+        alphaMatrix = numerical::fillAlphaMatrix(velocityArrayX, velocityArrayY, rows, cols, timeStep, moveStep);
+
+        // for (int i = 0; i < rows * rows; ++i)
+        // {
+        //     for (int j = 0; j < cols * cols; ++j)
+        //     {
+        //         std::cout << alphaMatrix.getValue(i, j);
+        //     }
+        //     std::cout << std::endl;
+        // }
+        // std::cout << std::endl;
+        result = procedures::bicgstab(alphaMatrix, rhsVector, x0);
+
+        // result = procedures::conjugateGradient(alphaMatrix, rhsVector, result);
+        betaMatrix = numerical::fillBetaMatrix(velocityArrayX, velocityArrayY, rows, cols, timeStep, moveStep);
+
         rhsVector = procedures::product(betaMatrix, result);
+
         if (counter++ % int(time / timeStep / frames) == 0)
-        {
-            file << std::accumulate(result.begin(), result.end(), 0.0) << std::endl;
             imnd::push_vector_data2D(result, rows, cols);
-        }
+        file << std::accumulate(result.begin(), result.end(), 0.0) << std::endl;
     }
     file.close();
     imnd::write_data2D("density.dat", rows, cols, moveStep, moveStep);

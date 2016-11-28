@@ -52,68 +52,67 @@ double **fillVDistrib(double spinCenterX, double spinCenterY, double range,
         }
     return vDistribution;
 }
-CSR fillAlphaMatrix(double **velocityArrayX, double **velocityArrayY, int matrixSize, double timeStep, double moveStep)
+CSR fillAlphaMatrix(double **velocityX, double **velocityY, int nx, int ny, double dt, double dx)
 {
-    double scatterMatrixSize = matrixSize * matrixSize;
-    CSR scatterMatrix(scatterMatrixSize, scatterMatrixSize, scatterMatrixSize);
-    for (int i = 0; i < matrixSize; ++i)
+    CSR alphaMatrix(nx * nx, ny * ny, nx * ny);
+    for (int i = 0; i < ny; ++i)
     {
-        for (int j = 0; j < matrixSize; ++j)
+        for (int j = 0; j < nx; ++j)
         {
-            double l = i * matrixSize + j;
-            double alpha1 = +calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
-            double alpha2 = +calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double l = i * nx + j;
+            double alpha1 = -(dt * velocityX[i][j]) / (4.0 * dx);
+            double alpha2 = -(dt * velocityY[i][j]) / (4.0 * dx);
             double alpha3 = 1;
-            double alpha4 = -calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
-            double alpha5 = -calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
-            if (l - matrixSize >= 0)
-                scatterMatrix.setValue(l, l - matrixSize, alpha1);
+            double alpha4 = -alpha2;
+            double alpha5 = -alpha1;
+            // double alpha1 = 1;
+            // double alpha2 = 2;
+            // double alpha3 = 3;
+            // double alpha4 = 4;
+            // double alpha5 = 5;
+            if (l - nx >= 0)
+                alphaMatrix.setValue(l, l - nx, alpha1);
             if (l - 1 >= 0)
-                scatterMatrix.setValue(l, l - 1, alpha2);
+                alphaMatrix.setValue(l, l - 1, alpha2);
 
-            scatterMatrix.setValue(l, l, alpha3);
+            alphaMatrix.setValue(l, l, alpha3);
 
-            if (l + 1 < scatterMatrixSize)
-                scatterMatrix.setValue(l, l + 1, alpha4);
-            if (l + matrixSize < scatterMatrixSize)
-                scatterMatrix.setValue(l, l + matrixSize, alpha5);
+            if (l + 1 < nx * nx)
+                alphaMatrix.setValue(l, l + 1, alpha4);
+            if (l + nx < nx * nx)
+                alphaMatrix.setValue(l, l + nx, alpha5);
         }
     }
-    scatterMatrix.setEndIndicator();
-    return scatterMatrix;
+    alphaMatrix.setEndIndicator();
+    return alphaMatrix;
 }
-CSR fillBetaMatrix(double **velocityArrayX, double **velocityArrayY, int matrixSize, double timeStep, double moveStep)
+CSR fillBetaMatrix(double **velocityX, double **velocityY, int nx, int ny, double dt, double dx)
 {
-    double scatterMatrixSize = matrixSize * matrixSize;
-    CSR scatterMatrix(scatterMatrixSize, scatterMatrixSize, scatterMatrixSize);
-    for (int i = 0; i < matrixSize; ++i)
+    CSR betaMatrix(nx * nx, ny * ny, nx * ny);
+    for (int i = 0; i < ny; ++i)
     {
-        for (int j = 0; j < matrixSize; ++j)
+        for (int j = 0; j < nx; ++j)
         {
-            double l = i * matrixSize + j;
-            double beta1 = -calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
-            double beta2 = -calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
+            double l = i * nx + j;
+            double beta1 = (dt * velocityX[i][j]) / (4.0 * dx);
+            double beta2 = (dt * velocityY[i][j]) / (4.0 * dx);
             double beta3 = 1;
-            double beta4 = +calculateModulus(timeStep, moveStep, velocityArrayY[i][j]);
-            double beta5 = +calculateModulus(timeStep, moveStep, velocityArrayX[i][j]);
-            if (l - matrixSize >= 0)
-                scatterMatrix.setValue(l, l - matrixSize, beta1);
+            double beta4 = -beta2;
+            double beta5 = -beta1;
+            if (l - nx >= 0)
+                betaMatrix.setValue(l, l - nx, beta1);
             if (l - 1 >= 0)
-                scatterMatrix.setValue(l, l - 1, beta2);
+                betaMatrix.setValue(l, l - 1, beta2);
 
-            scatterMatrix.setValue(l, l, beta3);
+            betaMatrix.setValue(l, l, beta3);
 
-            if (l + 1 < scatterMatrixSize)
-                scatterMatrix.setValue(l, l + 1, beta4);
-            if (l + matrixSize < scatterMatrixSize)
-                scatterMatrix.setValue(l, l + matrixSize, beta5);
+            if (l + 1 < nx * nx)
+                betaMatrix.setValue(l, l + 1, beta4);
+            if (l + nx < nx * nx)
+                betaMatrix.setValue(l, l + nx, beta5);
         }
     }
-    scatterMatrix.setEndIndicator();
-    return scatterMatrix;
-}
-double calculateModulus(double timeStep, double moveStep, double velocity)
-{
-    return (timeStep * velocity) / (4.0 * moveStep);
+    betaMatrix.setEndIndicator();
+    return betaMatrix;
 }
 }
