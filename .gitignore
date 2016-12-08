@@ -29,8 +29,8 @@
 *.app
 
 # Build files
-app/build/*
-thesis/.build/*
+app/build
+thesis/.build
 
 # Generated data
 *.dat
