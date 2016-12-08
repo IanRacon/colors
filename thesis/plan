@@ -1,0 +1,52 @@
+Część pierwsza:
+	Rysunki:
+		Kilka rysunków gęstości z widocznymi ujemnymi gęstościami w czasie splot with pm3d
+		Rysunek wiru psi
+		Rysunek wiru zeta
+		Rysunek prędkości
+	Wykresy:
+		Wykres całego pakietu w czasie - ujemnej części i dodatniej na jednym wykresie
+	Wzory:
+		Dojście do wzoru numerycznego Cranka Nicholsona
+		Analiza stabilności VonNeumanna	
+Część druga:
+	Wzory:
+		FCT			
+	Rysunki:
+		Rysunek obrazujący dyfuzję numeryczną (siatka)
+	Wykresy:
+
+Część trzecia:
+	Wzory:
+		Schemat square root
+		FCT	
+	Rysunki:
+		Rysunki z cranka nicholsona vs rysunki z FCT
+	Wykresy:
+		Wykres pakietu w czasie
+Część czwarta:
+	Wzory:
+		Wirowość
+		Prędkości
+	Rysunki:
+		Psi
+		Zeta
+		Prędkość Vx
+		Prędkość Vy
+		Rysunek gęstości przy brzegu
+		Rysunek gęstości na środku
+	Wykres:
+		Wykres pakietu od czasu przy brzegu
+		Wykres pakietu od czasu na środku
+Część piąta:
+	Wzory:
+		miara homogenizacju
+		całkowite ilość barwnika w układzie
+		Dodanie kolorów
+	Rysunki:
+		Mieszanie w czasie
+		Osobno wszystkie kolory
+	Wykres:
+		Zmiana homogeniczności układu w czasie
+Część szósta:
+		

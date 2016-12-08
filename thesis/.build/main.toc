@@ -1,0 +1,30 @@
+\contentsline {chapter}{\numberline {1}Wst\IeC {\k e}p}{7}
+\contentsline {section}{\numberline {1.1}Problem szybkiego mieszania}{7}
+\contentsline {chapter}{\numberline {2}Wprowadzenie teoretyczne}{9}
+\contentsline {section}{\numberline {2.1}Adwekcja}{9}
+\contentsline {section}{\numberline {2.2}R\IeC {\'o}wnanie Naviera Stokesa}{9}
+\contentsline {chapter}{\numberline {3}R\IeC {\'o}wnanie adwekcji metod\IeC {\k a} Cranka-Nicholson}{11}
+\contentsline {section}{\numberline {3.1}Crank-Nicholson}{11}
+\contentsline {section}{\numberline {3.2}Analiza Von Neumanna}{11}
+\contentsline {section}{\numberline {3.3}Bicgstab}{11}
+\contentsline {section}{\numberline {3.4}Wyniki z ujemn\IeC {\k a} g\IeC {\k e}sto\IeC {\'s}ci\IeC {\k a}}{11}
+\contentsline {chapter}{\numberline {4}Problem dyfuzji numerycznej}{13}
+\contentsline {section}{\numberline {4.1}Analiza problemu}{13}
+\contentsline {section}{\numberline {4.2}FCT}{13}
+\contentsline {chapter}{\numberline {5}Schemat square-root}{15}
+\contentsline {section}{\numberline {5.1}Om\IeC {\'o}wienie metody}{15}
+\contentsline {section}{\numberline {5.2}Wady metody square-root}{15}
+\contentsline {section}{\numberline {5.3}FCT}{15}
+\contentsline {chapter}{\numberline {6}Problem pr\IeC {\k e}dko\IeC {\'s}ci na brzegach}{17}
+\contentsline {section}{\numberline {6.1}Modelowanie funkcji wirowo\IeC {\'s}ci}{17}
+\contentsline {section}{\numberline {6.2}Niezerowa pr\IeC {\k e}dko\IeC {\'s}\IeC {\'c} na brzegach}{17}
+\contentsline {chapter}{\numberline {7}Statyczne mieszanie kolor\IeC {\'o}w}{19}
+\contentsline {section}{\numberline {7.1}Wprowadzenie}{19}
+\contentsline {section}{\numberline {7.2}Mieszanie}{19}
+\contentsline {section}{\numberline {7.3}Sta\IeC {\l }a mieszania}{19}
+\contentsline {section}{\numberline {7.4}Schematy mieszania}{19}
+\contentsline {chapter}{\numberline {8}Dynamiczne mieszanie kolor\IeC {\'o}w}{21}
+\contentsline {section}{\numberline {8.1}Wprowadzenie}{21}
+\contentsline {section}{\numberline {8.2}Mieszanie}{21}
+\contentsline {section}{\numberline {8.3}Sta\IeC {\l }a mieszania}{21}
+\contentsline {chapter}{\numberline {9}Bibliografia}{23}

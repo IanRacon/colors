@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/colors.exe.dir/main.cpp.o  -o ../bin/colors.exe -rdynamic libmyLibrary.a -lpthread 

@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/dft.exe.dir/dct.cpp.o CMakeFiles/dft.exe.dir/reszta.cpp.o  -o dft.exe -rdynamic -lfftw3 

@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ian/Engineer/colors/app/source/ini.c
+stdio.h
+-
+ctype.h
+-
+string.h
+-
+ini.h
+/home/ian/Engineer/colors/app/source/ini.h
+stdlib.h
+-
+
+include/ini.h
+stdio.h
+-
+
