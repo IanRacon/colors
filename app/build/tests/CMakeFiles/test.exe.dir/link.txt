@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/test.exe.dir/main.cpp.o  -o ../../bin/test.exe -rdynamic ../source/libmyLibrary.a googletest-master/googlemock/gtest/libgtest.a googletest-master/googlemock/gtest/libgtest_main.a googletest-master/googlemock/gtest/libgtest.a -lpthread 

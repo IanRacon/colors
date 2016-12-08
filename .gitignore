@@ -30,7 +30,7 @@
 
 # Build files
 app/build
-thesis/.build
+thesis/\.build
 
 # Generated data
 *.dat

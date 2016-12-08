@@ -1,7 +1,0 @@
-/home/ian/Engineer/colors/app/build/source/CMakeFiles/myLibrary.dir
-/home/ian/Engineer/colors/app/build/tests/googletest-master/googlemock/gtest/CMakeFiles/gtest.dir
-/home/ian/Engineer/colors/app/build/tests/googletest-master/googlemock/CMakeFiles/gmock.dir
-/home/ian/Engineer/colors/app/build/tests/googletest-master/googlemock/gtest/CMakeFiles/gtest_main.dir
-/home/ian/Engineer/colors/app/build/tests/CMakeFiles/myTest.dir
-/home/ian/Engineer/colors/app/build/source/CMakeFiles/colors.exe.dir
-/home/ian/Engineer/colors/app/build/tests/googletest-master/googlemock/CMakeFiles/gmock_main.dir
