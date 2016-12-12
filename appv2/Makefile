@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ian/Engineer/wysylka_0212
+CMAKE_SOURCE_DIR = /home/ian/Engineer/colors/appv2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ian/Engineer/wysylka_0212
+CMAKE_BINARY_DIR = /home/ian/Engineer/colors/appv2
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ian/Engineer/wysylka_0212/CMakeFiles /home/ian/Engineer/wysylka_0212/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ian/Engineer/colors/appv2/CMakeFiles /home/ian/Engineer/colors/appv2/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ian/Engineer/wysylka_0212/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ian/Engineer/colors/appv2/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -162,6 +162,30 @@ reszta.cpp.s:
 	$(MAKE) -f CMakeFiles/dft.exe.dir/build.make CMakeFiles/dft.exe.dir/reszta.cpp.s
 .PHONY : reszta.cpp.s
 
+utils.o: utils.cpp.o
+.PHONY : utils.o
+
+# target to build an object file
+utils.cpp.o:
+	$(MAKE) -f CMakeFiles/dft.exe.dir/build.make CMakeFiles/dft.exe.dir/utils.cpp.o
+.PHONY : utils.cpp.o
+
+utils.i: utils.cpp.i
+.PHONY : utils.i
+
+# target to preprocess a source file
+utils.cpp.i:
+	$(MAKE) -f CMakeFiles/dft.exe.dir/build.make CMakeFiles/dft.exe.dir/utils.cpp.i
+.PHONY : utils.cpp.i
+
+utils.s: utils.cpp.s
+.PHONY : utils.s
+
+# target to generate assembly for a file
+utils.cpp.s:
+	$(MAKE) -f CMakeFiles/dft.exe.dir/build.make CMakeFiles/dft.exe.dir/utils.cpp.s
+.PHONY : utils.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -177,6 +201,9 @@ help:
 	@echo "... reszta.o"
 	@echo "... reszta.i"
 	@echo "... reszta.s"
+	@echo "... utils.o"
+	@echo "... utils.i"
+	@echo "... utils.s"
 .PHONY : help
 
 

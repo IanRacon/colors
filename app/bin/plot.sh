@@ -1,6 +1,6 @@
 #!/usr/bin/gnuplot
 reset
-n=100 #n frames
+n=200 #n frames
 set term gif animate #size 1024,1024
 set output "animation.gif"
 set pm3d

@@ -21,4 +21,5 @@ void addFast(const double *lhs, const double *rhs, double *result, int size);
 double sum2DArray(const double *const *const array, double rows, double cols);
 double dot(const std::vector<double> &lhs, const std::vector<double> &rhs);
 double norm(const std::vector<double> &vec);
+std::vector<double> getInitialDensity(int centerX, int centerY, int rows, int cols, double moveStep, double sigma);
 }

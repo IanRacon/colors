@@ -33,8 +33,8 @@ struct imn_gnuplot_params
     unsigned int stype;
     imn_gnuplot_params()
     {
-        image_width = 800;
-        image_height = 600;
+        image_width = 1024;
+        image_height = 1024;
         cntrlevels = "50";
         title = "Wygenerowany przez IMNMATH";
         xlabel = "os X";
@@ -227,12 +227,88 @@ class imn
         }
         fclose(f);
     }
+    static void write_2d_system(const char *filename, T *data, int nx, int ny, double dx, double dy)
+    {
+        FILE *f;
+        f = fopen(filename, "w");
+        for (int i = 0; i < nx; i++)
+        {
+            for (int j = 0; j < ny; j++)
+            {
+                fprintf(f, "%e\t%e\t%e\n", dx * i, dy * j, double(data[i * ny + j]));
+            }
+            fprintf(f, "\n");
+        }
+        fclose(f);
+    }
 
     /** 
 * Generuje wykres 2D w formacie png na podstawie podanej tablicy danych.
 * Wymagane jest posiadanie zainstalowanego programu gnuplot.
 */
     static void plot_2d_system(const char *outputname, T **data, int nx, int ny, double dx, double dy)
+    {
+        write_2d_system("tmp.txt", data, nx, ny, dx, dy);
+        ofstream file("tmp.plt");
+        file << "set terminal png size " << plot_params.image_width << "," << plot_params.image_height << " enhanced font 'Helvetica,12'\n";
+        file << "set o '" << outputname << "'\n";
+        file << "set xl '" << plot_params.xlabel << "'\n";
+        file << "set yl '" << plot_params.ylabel << "'\n";
+        file << "set view map\n";
+        file << "set size ratio -1\n";
+        file << "set title '" << plot_params.title << "'\n";
+        if (plot_params.stype & GNUPLOT_CONTOUR)
+        {
+            file << "set contours\n";
+            file << "set contour base\n";
+            file << "set cntrparam levels " << plot_params.cntrlevels << " \n";
+            file << "unset clabel\n";
+            if (!(plot_params.stype & GNUPLOT_PM3D))
+                file << "unset surface\n";
+        }
+        file << "splot 'tmp.txt' u 1:2:3 w pm3d";
+
+        if (plot_params.stype & GNUPLOT_CONTOUR)
+        {
+            file << " lt -1";
+        }
+        file << " t ''\n";
+        file.close();
+        int res = system("gnuplot tmp.plt");
+        res = system("rm tmp.*");
+    }
+    static void plot_2d_system(const char *outputname, T *data, int nx, int ny, double dx, double dy)
+    {
+        write_2d_system("tmp.txt", data, nx, ny, dx, dy);
+        ofstream file("tmp.plt");
+        file << "set terminal png size " << plot_params.image_width << "," << plot_params.image_height << " enhanced font 'Helvetica,12'\n";
+        file << "set o '" << outputname << "'\n";
+        file << "set xl '" << plot_params.xlabel << "'\n";
+        file << "set yl '" << plot_params.ylabel << "'\n";
+        file << "set view map\n";
+        file << "set size ratio -1\n";
+        file << "set title '" << plot_params.title << "'\n";
+        if (plot_params.stype & GNUPLOT_CONTOUR)
+        {
+            file << "set contours\n";
+            file << "set contour base\n";
+            file << "set cntrparam levels " << plot_params.cntrlevels << " \n";
+            file << "unset clabel\n";
+            if (!(plot_params.stype & GNUPLOT_PM3D))
+                file << "unset surface\n";
+        }
+        file << "splot 'tmp.txt' u 1:2:3 w pm3d";
+
+        if (plot_params.stype & GNUPLOT_CONTOUR)
+        {
+            file << " lt -1";
+        }
+        file << " t ''\n";
+        file.close();
+        int res = system("gnuplot tmp.plt");
+        res = system("rm tmp.*");
+    }
+    static void plot_2d_system(const char *outputname, const std::vector<double> &data, int nx, int ny, double dx, double dy)
     {
         write_2d_system("tmp.txt", data, nx, ny, dx, dy);
         ofstream file("tmp.plt");

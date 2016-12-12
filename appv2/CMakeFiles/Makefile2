@@ -47,10 +47,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ian/Engineer/wysylka_0212
+CMAKE_SOURCE_DIR = /home/ian/Engineer/colors/appv2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ian/Engineer/wysylka_0212
+CMAKE_BINARY_DIR = /home/ian/Engineer/colors/appv2
 
 #=============================================================================
 # Target rules for target CMakeFiles/dft.exe.dir
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/ian/Engineer/wysylka_0212
 CMakeFiles/dft.exe.dir/all:
 	$(MAKE) -f CMakeFiles/dft.exe.dir/build.make CMakeFiles/dft.exe.dir/depend
 	$(MAKE) -f CMakeFiles/dft.exe.dir/build.make CMakeFiles/dft.exe.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ian/Engineer/wysylka_0212/CMakeFiles  1 2
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ian/Engineer/colors/appv2/CMakeFiles  1 2 3
 	@echo "Built target dft.exe"
 .PHONY : CMakeFiles/dft.exe.dir/all
 
@@ -69,9 +69,9 @@ all: CMakeFiles/dft.exe.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/dft.exe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ian/Engineer/wysylka_0212/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ian/Engineer/colors/appv2/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/dft.exe.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ian/Engineer/wysylka_0212/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ian/Engineer/colors/appv2/CMakeFiles 0
 .PHONY : CMakeFiles/dft.exe.dir/rule
 
 # Convenience name for target.

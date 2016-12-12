@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ian/Engineer/wysylka_0212
+CMAKE_SOURCE_DIR = /home/ian/Engineer/colors/appv2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ian/Engineer/wysylka_0212
+CMAKE_BINARY_DIR = /home/ian/Engineer/colors/appv2
 
 # Include any dependencies generated for this target.
 include CMakeFiles/dft.exe.dir/depend.make
@@ -49,19 +49,42 @@ include CMakeFiles/dft.exe.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/dft.exe.dir/flags.make
 
+CMakeFiles/dft.exe.dir/utils.cpp.o: CMakeFiles/dft.exe.dir/flags.make
+CMakeFiles/dft.exe.dir/utils.cpp.o: utils.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ian/Engineer/colors/appv2/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/dft.exe.dir/utils.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/dft.exe.dir/utils.cpp.o -c /home/ian/Engineer/colors/appv2/utils.cpp
+
+CMakeFiles/dft.exe.dir/utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dft.exe.dir/utils.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ian/Engineer/colors/appv2/utils.cpp > CMakeFiles/dft.exe.dir/utils.cpp.i
+
+CMakeFiles/dft.exe.dir/utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dft.exe.dir/utils.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ian/Engineer/colors/appv2/utils.cpp -o CMakeFiles/dft.exe.dir/utils.cpp.s
+
+CMakeFiles/dft.exe.dir/utils.cpp.o.requires:
+.PHONY : CMakeFiles/dft.exe.dir/utils.cpp.o.requires
+
+CMakeFiles/dft.exe.dir/utils.cpp.o.provides: CMakeFiles/dft.exe.dir/utils.cpp.o.requires
+	$(MAKE) -f CMakeFiles/dft.exe.dir/build.make CMakeFiles/dft.exe.dir/utils.cpp.o.provides.build
+.PHONY : CMakeFiles/dft.exe.dir/utils.cpp.o.provides
+
+CMakeFiles/dft.exe.dir/utils.cpp.o.provides.build: CMakeFiles/dft.exe.dir/utils.cpp.o
+
 CMakeFiles/dft.exe.dir/dct.cpp.o: CMakeFiles/dft.exe.dir/flags.make
 CMakeFiles/dft.exe.dir/dct.cpp.o: dct.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ian/Engineer/wysylka_0212/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ian/Engineer/colors/appv2/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/dft.exe.dir/dct.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/dft.exe.dir/dct.cpp.o -c /home/ian/Engineer/wysylka_0212/dct.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/dft.exe.dir/dct.cpp.o -c /home/ian/Engineer/colors/appv2/dct.cpp
 
 CMakeFiles/dft.exe.dir/dct.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dft.exe.dir/dct.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ian/Engineer/wysylka_0212/dct.cpp > CMakeFiles/dft.exe.dir/dct.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ian/Engineer/colors/appv2/dct.cpp > CMakeFiles/dft.exe.dir/dct.cpp.i
 
 CMakeFiles/dft.exe.dir/dct.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dft.exe.dir/dct.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ian/Engineer/wysylka_0212/dct.cpp -o CMakeFiles/dft.exe.dir/dct.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ian/Engineer/colors/appv2/dct.cpp -o CMakeFiles/dft.exe.dir/dct.cpp.s
 
 CMakeFiles/dft.exe.dir/dct.cpp.o.requires:
 .PHONY : CMakeFiles/dft.exe.dir/dct.cpp.o.requires
@@ -74,17 +97,17 @@ CMakeFiles/dft.exe.dir/dct.cpp.o.provides.build: CMakeFiles/dft.exe.dir/dct.cpp.
 
 CMakeFiles/dft.exe.dir/reszta.cpp.o: CMakeFiles/dft.exe.dir/flags.make
 CMakeFiles/dft.exe.dir/reszta.cpp.o: reszta.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ian/Engineer/wysylka_0212/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ian/Engineer/colors/appv2/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/dft.exe.dir/reszta.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/dft.exe.dir/reszta.cpp.o -c /home/ian/Engineer/wysylka_0212/reszta.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/dft.exe.dir/reszta.cpp.o -c /home/ian/Engineer/colors/appv2/reszta.cpp
 
 CMakeFiles/dft.exe.dir/reszta.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dft.exe.dir/reszta.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ian/Engineer/wysylka_0212/reszta.cpp > CMakeFiles/dft.exe.dir/reszta.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ian/Engineer/colors/appv2/reszta.cpp > CMakeFiles/dft.exe.dir/reszta.cpp.i
 
 CMakeFiles/dft.exe.dir/reszta.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dft.exe.dir/reszta.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ian/Engineer/wysylka_0212/reszta.cpp -o CMakeFiles/dft.exe.dir/reszta.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ian/Engineer/colors/appv2/reszta.cpp -o CMakeFiles/dft.exe.dir/reszta.cpp.s
 
 CMakeFiles/dft.exe.dir/reszta.cpp.o.requires:
 .PHONY : CMakeFiles/dft.exe.dir/reszta.cpp.o.requires
@@ -97,12 +120,14 @@ CMakeFiles/dft.exe.dir/reszta.cpp.o.provides.build: CMakeFiles/dft.exe.dir/reszt
 
 # Object files for target dft.exe
 dft_exe_OBJECTS = \
+"CMakeFiles/dft.exe.dir/utils.cpp.o" \
 "CMakeFiles/dft.exe.dir/dct.cpp.o" \
 "CMakeFiles/dft.exe.dir/reszta.cpp.o"
 
 # External object files for target dft.exe
 dft_exe_EXTERNAL_OBJECTS =
 
+dft.exe: CMakeFiles/dft.exe.dir/utils.cpp.o
 dft.exe: CMakeFiles/dft.exe.dir/dct.cpp.o
 dft.exe: CMakeFiles/dft.exe.dir/reszta.cpp.o
 dft.exe: CMakeFiles/dft.exe.dir/build.make
@@ -114,6 +139,7 @@ dft.exe: CMakeFiles/dft.exe.dir/link.txt
 CMakeFiles/dft.exe.dir/build: dft.exe
 .PHONY : CMakeFiles/dft.exe.dir/build
 
+CMakeFiles/dft.exe.dir/requires: CMakeFiles/dft.exe.dir/utils.cpp.o.requires
 CMakeFiles/dft.exe.dir/requires: CMakeFiles/dft.exe.dir/dct.cpp.o.requires
 CMakeFiles/dft.exe.dir/requires: CMakeFiles/dft.exe.dir/reszta.cpp.o.requires
 .PHONY : CMakeFiles/dft.exe.dir/requires
@@ -123,6 +149,6 @@ CMakeFiles/dft.exe.dir/clean:
 .PHONY : CMakeFiles/dft.exe.dir/clean
 
 CMakeFiles/dft.exe.dir/depend:
-	cd /home/ian/Engineer/wysylka_0212 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ian/Engineer/wysylka_0212 /home/ian/Engineer/wysylka_0212 /home/ian/Engineer/wysylka_0212 /home/ian/Engineer/wysylka_0212 /home/ian/Engineer/wysylka_0212/CMakeFiles/dft.exe.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ian/Engineer/colors/appv2 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ian/Engineer/colors/appv2 /home/ian/Engineer/colors/appv2 /home/ian/Engineer/colors/appv2 /home/ian/Engineer/colors/appv2 /home/ian/Engineer/colors/appv2/CMakeFiles/dft.exe.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/dft.exe.dir/depend
 

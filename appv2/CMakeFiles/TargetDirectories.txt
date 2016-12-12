@@ -1,1 +1,1 @@
-/home/ian/Engineer/wysylka_0212/CMakeFiles/dft.exe.dir
+/home/ian/Engineer/colors/appv2/CMakeFiles/dft.exe.dir

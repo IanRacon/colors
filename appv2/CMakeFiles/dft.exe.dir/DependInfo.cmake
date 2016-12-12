@@ -4,8 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ian/Engineer/wysylka_0212/dct.cpp" "/home/ian/Engineer/wysylka_0212/CMakeFiles/dft.exe.dir/dct.cpp.o"
-  "/home/ian/Engineer/wysylka_0212/reszta.cpp" "/home/ian/Engineer/wysylka_0212/CMakeFiles/dft.exe.dir/reszta.cpp.o"
+  "/home/ian/Engineer/colors/appv2/dct.cpp" "/home/ian/Engineer/colors/appv2/CMakeFiles/dft.exe.dir/dct.cpp.o"
+  "/home/ian/Engineer/colors/appv2/reszta.cpp" "/home/ian/Engineer/colors/appv2/CMakeFiles/dft.exe.dir/reszta.cpp.o"
+  "/home/ian/Engineer/colors/appv2/utils.cpp" "/home/ian/Engineer/colors/appv2/CMakeFiles/dft.exe.dir/utils.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/dft.exe.dir/utils.cpp.o"
   "CMakeFiles/dft.exe.dir/dct.cpp.o"
   "CMakeFiles/dft.exe.dir/reszta.cpp.o"
   "dft.exe.pdb"

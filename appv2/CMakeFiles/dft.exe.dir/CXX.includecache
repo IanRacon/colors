@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/ian/Engineer/wysylka_0212/dct.cpp
+/home/ian/Engineer/colors/appv2/dct.cpp
 stdio.h
 -
 stdlib.h
@@ -16,13 +16,15 @@ math.h
 iostream
 -
 funkcje.h
-/home/ian/Engineer/wysylka_0212/funkcje.h
+/home/ian/Engineer/colors/appv2/funkcje.h
+utils.h
+/home/ian/Engineer/colors/appv2/utils.h
 imnmath.hpp
-/home/ian/Engineer/wysylka_0212/imnmath.hpp
+/home/ian/Engineer/colors/appv2/imnmath.hpp
 
-/home/ian/Engineer/wysylka_0212/funkcje.h
+/home/ian/Engineer/colors/appv2/funkcje.h
 
-/home/ian/Engineer/wysylka_0212/imnmath.hpp
+/home/ian/Engineer/colors/appv2/imnmath.hpp
 cmath
 -
 iostream
@@ -44,7 +46,7 @@ vector
 cstring
 -
 
-/home/ian/Engineer/wysylka_0212/reszta.cpp
+/home/ian/Engineer/colors/appv2/reszta.cpp
 stdio.h
 -
 stdlib.h
@@ -54,5 +56,17 @@ math.h
 fftw3.h
 -
 funkcje.h
-/home/ian/Engineer/wysylka_0212/funkcje.h
+/home/ian/Engineer/colors/appv2/funkcje.h
+
+/home/ian/Engineer/colors/appv2/utils.cpp
+utils.h
+/home/ian/Engineer/colors/appv2/utils.h
+
+/home/ian/Engineer/colors/appv2/utils.h
+string
+-
+vector
+-
+fstream
+-
 

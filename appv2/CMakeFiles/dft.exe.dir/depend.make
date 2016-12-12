@@ -4,7 +4,11 @@
 CMakeFiles/dft.exe.dir/dct.cpp.o: dct.cpp
 CMakeFiles/dft.exe.dir/dct.cpp.o: funkcje.h
 CMakeFiles/dft.exe.dir/dct.cpp.o: imnmath.hpp
+CMakeFiles/dft.exe.dir/dct.cpp.o: utils.h
 
 CMakeFiles/dft.exe.dir/reszta.cpp.o: funkcje.h
 CMakeFiles/dft.exe.dir/reszta.cpp.o: reszta.cpp
+
+CMakeFiles/dft.exe.dir/utils.cpp.o: utils.cpp
+CMakeFiles/dft.exe.dir/utils.cpp.o: utils.h
 
